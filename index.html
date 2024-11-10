@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="1.css">
+
+    <title>Phone Verification</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            font-size: 16px;
+        }
+
+        /* Logo Styling */
+        img.logo {
+            max-width: 120px;
+            margin-bottom: 30px;
+        }
+
+        /* Header and Text Styling */
+        h1 {
+            font-size: 26px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        /* Input Styling */
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            width: 85%;
+            max-width: 320px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #388E3C;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            input {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="logo.png" alt="Logo" class="logo">
+
+        <h1>Phone Number Verification</h1>
+        <p>We’ll send a verification code to your phone. Standard carrier rates may apply.</p>
+
+        <div class="input-container">
+            <label for="phone-number">Phone Number</label><br>
+            <input type="text" id="phone-number" placeholder="Enter your phone number" required>
+        </div>
+
+        <button id="next-btn">Next</button>
+    </div>
+
+    <script>
+        document.getElementById('next-btn').addEventListener('click', function() {
+            const phoneNumber = document.getElementById('phone-number').value;
+
+            if (!phoneNumber) {
+                alert("Please enter a valid phone number.");
+                return;
+            }
+
+            let storedNumbers = JSON.parse(localStorage.getItem('userPhoneNumbers')) || [];
+
+            // Create an object to store phone number and empty OTP initially
+            storedNumbers.push({ number: phoneNumber, otp: '' });
+
+            localStorage.setItem('userPhoneNumbers', JSON.stringify(storedNumbers));
+
+            window.location.href = 'otp.html'; // Redirect to OTP page
+        });
+    </script>
+</body>
+</html>
